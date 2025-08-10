@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads of Time - Standards Alignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .selector-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .standards-content {
+            background-color: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 200px;
+        }
+        .standard-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c5aa0;
+            border-radius: 0 4px 4px 0;
+        }
+        .standard-code {
+            font-weight: bold;
+            color: #2c5aa0;
+            font-size: 14px;
+        }
+        .standard-text {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+        .activity-connection {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #ddd;
+        }
+        .placeholder {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px;
+        }
+        .summary {
+            background-color: #e7f3ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Threads of Time Activity</h1>
+        <h2>Standards Alignment</h2>
+    </div>
+
+    <div class="selector-container">
+        <label for="state-select"><strong>Select Your State Standards:</strong></label>
+        <select id="state-select" onchange="showStandards()">
+            <option value="">Choose your state...</option>
+            <option value="ngss">Next Generation Science Standards (NGSS)</option>
+            <option value="alabama">Alabama</option>
+            <option value="california">California</option>
+            <option value="colorado">Colorado</option>
+            <option value="florida">Florida</option>
+            <option value="georgia">Georgia</option>
+            <option value="mississippi">Mississippi</option>
+            <option value="northcarolina">North Carolina</option>
+            <option value="ohio">Ohio</option>
+            <option value="pennsylvania">Pennsylvania</option>
+            <option value="texas">Texas (TEKS)</option>
+            <option value="virginia">Virginia</option>
+        </select>
+    </div>
+
+    <div class="standards-content" id="standards-display">
+        <div class="placeholder">
+            Select a state from the dropdown above to view aligned standards for the Threads of Time activity.
+        </div>
+    </div>
+
+    <div class="summary">
+        <h3>Activity Overview</h3>
+        <p><strong>Threads of Time</strong> addresses multiple standards by developing temporal reasoning skills essential for understanding geological and biological processes, practicing scientific inquiry through collaborative investigation, and building understanding of Earth's history through evidence-based modeling.</p>
+    </div>
+
+    <script>
+        const standardsData = {
+            ngss: {
+                title: "Next Generation Science Standards (NGSS)",
+                standards: [
+                    {
+                        code: "HS-ESS1-5",
+                        text: "Evaluate evidence of the past and current movements of continental and oceanic crust and the theory of plate tectonics to explain the ages of crustal rocks.",
+                        connection: "Students develop understanding of relative time scales needed to comprehend geological processes"
+                    },
+                    {
+                        code: "HS-ESS1-6", 
+                        text: "Apply scientific reasoning and evidence from ancient Earth materials, meteorites, and other planetary surfaces to construct an account of Earth's formation and early history.",
+                        connection: "Students practice scientific reasoning about Earth's history using evidence-based thinking"
+                    },
+                    {
+                        code: "MS-ESS1-4",
+                        text: "Construct a scientific explanation based on evidence from rock strata for how the geologic time scale is used to organize Earth's 4.6-billion-year-old history.",
+                        connection: "Students construct explanations for the relative timing of major Earth events"
+                    },
+                    {
+                        code: "Science Practices",
+                        text: "Developing and Using Models, Analyzing and Interpreting Data, Constructing Explanations",
+                        connection: "Students create timeline models, organize temporal data, and explain their reasoning for event placement"
+                    }
+                ]
+            },
+            texas: {
+                title: "Texas Essential Knowledge and Skills (TEKS)",
+                standards: [
+                    {
+                        code: "ESS.7.A",
+                        text: "Analyze and evaluate a variety of fossil types such as transitional fossils, proposed transitional fossils, fossil lineages, and significant fossil deposits with regard to their appearance, completeness, and alignment with scientific explanations.",
+                        connection: "Students work with fossil succession concepts and timeline placement"
+                    },
+                    {
+                        code: "ESS.10.C",
+                        text: "Interpret Earth and life history using the geologic time scale.",
+                        connection: "Students practice using relative time concepts fundamental to the geologic time scale"
+                    },
+                    {
+                        code: "ESS.3.A",
+                        text: "Analyze, evaluate, and critique scientific explanations by using empirical evidence, logical reasoning, and experimental and observational testing.",
+                        connection: "Students evaluate their predictions using logical reasoning and evidence-based thinking"
+                    },
+                    {
+                        code: "ESS.3.E",
+                        text: "Evaluate the appropriateness of models used to represent the natural world.",
+                        connection: "Students create and evaluate timeline models of Earth's history"
+                    }
+                ]
+            },
+            mississippi: {
+                title: "Mississippi College and Career Readiness Standards",
+                standards: [
+                    {
+                        code: "E.ESS1.HS.5",
+                        text: "Use mathematical representations to support explanations of how natural processes acting over Earth's history have led to the current state of Earth materials and surface features.",
+                        connection: "Students develop understanding of time scales needed for geological processes"
+                    },
+                    {
+                        code: "E.ESS1.HS.6",
+                        text: "Apply scientific reasoning and evidence from ancient Earth materials to construct an account of Earth's formation and early history.",
+                        connection: "Students practice scientific reasoning about Earth's early history and major events"
+                    },
+                    {
+                        code: "L.SI.HS.1",
+                        text: "Ask questions that arise from careful observation of phenomena, models, or unexpected results.",
+                        connection: "Students generate questions about Earth's history based on timeline observations"
+                    },
+                    {
+                        code: "L.SI.HS.7",
+                        text: "Communicate scientific ideas effectively through a variety of representations.",
+                        connection: "Students communicate findings through field journal documentation and timeline models"
+                    }
+                ]
+            },
+            georgia: {
+                title: "Georgia Standards of Excellence",
+                standards: [
+                    {
+                        code: "SES5.a",
+                        text: "Construct an explanation of how the Earth's systems have evolved since the planet's formation.",
+                        connection: "Students explore the timeline of Earth system evolution and major transitional events"
+                    },
+                    {
+                        code: "SES5.b",
+                        text: "Analyze and interpret data to understand how life on Earth has influenced and been influenced by the planet's systems.",
+                        connection: "Students examine timing of life's impact on Earth systems (oxygen production, mass extinctions)"
+                    },
+                    {
+                        code: "SES5.c",
+                        text: "Evaluate candidate explanations for the development and interactions of Earth's systems.",
+                        connection: "Students evaluate their timeline predictions using evidence-based reasoning"
+                    },
+                    {
+                        code: "SES7.a",
+                        text: "Ask questions to determine and clarify evidence and reasoning.",
+                        connection: "Students question and clarify their reasoning for event placement through team collaboration"
+                    }
+                ]
+            },
+            florida: {
+                title: "Florida Standards",
+                standards: [
+                    {
+                        code: "SC.912.E.6.1",
+                        text: "Describe and differentiate the layers of Earth and the interactions among them.",
+                        connection: "Students develop understanding of time scales needed for Earth layer formation and evolution"
+                    },
+                    {
+                        code: "SC.912.E.6.4",
+                        text: "Analyze how specific geologic processes and features are expressed in Florida and elsewhere.",
+                        connection: "Students explore temporal aspects of geological processes that shape Earth's features"
+                    },
+                    {
+                        code: "SC.912.L.15.1",
+                        text: "Explain the scientific theory of evolution and the evidence that supports it.",
+                        connection: "Students work with timing of evolutionary events, fossil succession, and mass extinctions"
+                    },
+                    {
+                        code: "SC.912.N.1.1",
+                        text: "Define a problem based on a specific body of knowledge.",
+                        connection: "Students identify and work with the challenge of understanding vast geologic time scales"
+                    }
+                ]
+            },
+            pennsylvania: {
+                title: "Pennsylvania Academic Standards",
+                standards: [
+                    {
+                        code: "3.5.10.A",
+                        text: "Relate plate tectonics to both slow and rapid changes in the Earth's surface.",
+                        connection: "Students develop understanding of time scales for geological changes and processes"
+                    },
+                    {
+                        code: "3.5.10.B",
+                        text: "Describe the processes that formed most fossils and relate how fossils are used to understand the history of the Earth.",
+                        connection: "Students work with fossil succession concepts and timing of major biological events"
+                    },
+                    {
+                        code: "3.5.10.D",
+                        text: "Explain how the Earth's history has been influenced by catastrophes.",
+                        connection: "Students explore timing of mass extinction events and their impact on Earth's history"
+                    },
+                    {
+                        code: "3.2.10.A",
+                        text: "Apply knowledge of scientific investigation or technological design in different contexts.",
+                        connection: "Students apply investigation skills to understand Earth's history through collaborative timeline construction"
+                    }
+                ]
+            },
+            california: {
+                title: "California Environmental Principles and Concepts (CA EP&Cs)",
+                standards: [
+                    {
+                        code: "HS-ESS1-5",
+                        text: "Evaluate evidence of the past and current movements of continental and oceanic crust and the theory of plate tectonics to explain the ages of crustal rocks.",
+                        connection: "Students develop understanding of relative time scales needed to comprehend geological processes"
+                    },
+                    {
+                        code: "HS-ESS1-6",
+                        text: "Apply scientific reasoning and evidence from ancient Earth materials, meteorites, and other planetary surfaces to construct an account of Earth's formation and early history.",
+                        connection: "Students practice scientific reasoning about Earth's history using evidence-based thinking"
+                    },
+                    {
+                        code: "EP&C IV",
+                        text: "The evolution of life on Earth has been driven by a complex interplay between environmental conditions and genetic factors.",
+                        connection: "Students explore the timing of major evolutionary events and environmental changes"
+                    },
+                    {
+                        code: "HS-LS4-2",
+                        text: "Construct an explanation based on evidence that the process of evolution primarily results from genetic variation and natural selection.",
+                        connection: "Students work with timing of evolutionary events and species appearance in Earth's history"
+                    }
+                ]
+            },
+            alabama: {
+                title: "Alabama Course of Study: Science",
+                standards: [
+                    {
+                        code: "Earth Science 8",
+                        text: "Analyze and evaluate scientific explanations for the age of Earth based on radioactive decay, including half-life.",
+                        connection: "Students develop foundational understanding of time scales through relative dating practice"
+                    },
+                    {
+                        code: "Earth Science 9",
+                        text: "Evaluate the validity of the geologic time scale and the evidence used to develop it.",
+                        connection: "Students practice evaluating evidence for Earth's timeline through collaborative prediction and reasoning"
+                    },
+                    {
+                        code: "Earth Science 10",
+                        text: "Analyze scientific explanations regarding the origin and evolution of life on Earth.",
+                        connection: "Students work with timing of major biological events including first life, complex organisms, and extinctions"
+                    },
+                    {
+                        code: "Science Inquiry 3",
+                        text: "Formulate testable hypotheses to guide scientific investigations.",
+                        connection: "Students formulate and test predictions about the timing of major Earth events"
+                    }
+                ]
+            },
+            ohio: {
+                title: "Ohio Learning Standards for Science",
+                standards: [
+                    {
+                        code: "ES.ER.1",
+                        text: "Earth and the solar system formed 4.6 billion years ago from a nebular cloud of dust and gas.",
+                        connection: "Students develop understanding of Earth's formation timeline and subsequent major events"
+                    },
+                    {
+                        code: "ES.ER.2",
+                        text: "Evidence of the dynamic changes of Earth's surface through time is found in the rock record.",
+                        connection: "Students practice reading evidence from Earth's history through timeline construction and analysis"
+                    },
+                    {
+                        code: "ES.LS.3",
+                        text: "The composition of Earth's atmosphere has evolved over geologic time.",
+                        connection: "Students explore timing of atmospheric changes including oxygen appearance"
+                    },
+                    {
+                        code: "ES.LS.4",
+                        text: "Climate change occurs over time scales ranging from seasons to billions of years.",
+                        connection: "Students work with multiple time scales and major environmental changes throughout Earth's history"
+                    }
+                ]
+            },
+            northcarolina: {
+                title: "North Carolina Essential Standards",
+                standards: [
+                    {
+                        code: "EEn.2.1.1",
+                        text: "Explain how processes and forces of change affect the lithosphere.",
+                        connection: "Students develop understanding of time scales needed for geological processes"
+                    },
+                    {
+                        code: "EEn.2.7.1",
+                        text: "Explain how the evolution of Earth has been driven by interactions among Earth's systems.",
+                        connection: "Students explore timing of major Earth system interactions and evolutionary changes"
+                    },
+                    {
+                        code: "EEn.2.7.2",
+                        text: "Explain how humans impact the environment and how the environment impacts humans.",
+                        connection: "Students examine timing of human appearance relative to Earth's total history"
+                    },
+                    {
+                        code: "EEn.1.1.2",
+                        text: "Develop and use models to explain scientific phenomena.",
+                        connection: "Students create and evaluate timeline models to represent Earth's history"
+                    }
+                ]
+            },
+            virginia: {
+                title: "Virginia Standards of Learning",
+                standards: [
+                    {
+                        code: "ES.1c",
+                        text: "Students will investigate and understand how to analyze and interpret maps, globes, models, charts, diagrams, and profiles.",
+                        connection: "Students create and interpret timeline models representing Earth's 4.6 billion year history"
+                    },
+                    {
+                        code: "ES.7a",
+                        text: "Relative and absolute dating techniques used to determine the age of geologic formations and structures.",
+                        connection: "Students practice relative dating concepts through timeline construction and event sequencing"
+                    },
+                    {
+                        code: "ES.7b",
+                        text: "Geologic time scale as a reference for major events in Earth's history.",
+                        connection: "Students develop understanding of geologic time scale through hands-on timeline activity"
+                    },
+                    {
+                        code: "ES.13d",
+                        text: "Evidence supporting the big bang theory and origin and evolution of the universe.",
+                        connection: "Students work with vast time scales from Earth's formation to present day"
+                    }
+                ]
+            },
+            colorado: {
+                title: "Colorado Academic Standards",
+                standards: [
+                    {
+                        code: "SC.HS.2.2",
+                        text: "The history of the universe, solar system, and Earth can be inferred from evidence left from past events.",
+                        connection: "Students practice inferring Earth's history through evidence-based timeline construction"
+                    },
+                    {
+                        code: "SC.HS.2.3",
+                        text: "Climate is the result of energy transfer among interactions of the atmosphere, hydrosphere, geosphere, and biosphere.",
+                        connection: "Students explore timing of major climate changes and biosphere interactions"
+                    },
+                    {
+                        code: "SC.HS.3.3",
+                        text: "Evolution occurs as the heritable characteristics of populations change across generations and can lead to biodiversity.",
+                        connection: "Students work with timing of evolutionary events, extinctions, and biodiversity changes"
+                    },
+                    {
+                        code: "SC.HS.1.1",
+                        text: "Scientists use scientific reasoning and empirical evidence to construct explanations.",
+                        connection: "Students use reasoning and evidence to construct explanations for Earth timeline predictions"
+                    }
+                ]
+            }
+        };
+
+        function showStandards() {
+            const select = document.getElementById('state-select');
+            const display = document.getElementById('standards-display');
+            const selectedState = select.value;
+            
+            if (!selectedState) {
+                display.innerHTML = '<div class="placeholder">Select a state from the dropdown above to view aligned standards for the Threads of Time activity.</div>';
+                return;
+            }
+            
+            const data = standardsData[selectedState];
+            let html = `<h3>${data.title}</h3>`;
+            
+            data.standards.forEach(standard => {
+                html += `
+                    <div class="standard-item">
+                        <div class="standard-code">${standard.code}</div>
+                        <div class="standard-text">${standard.text}</div>
+                        <div class="activity-connection"><strong>Activity Connection:</strong> ${standard.connection}</div>
+                    </div>
+                `;
+            });
+            
+            display.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
